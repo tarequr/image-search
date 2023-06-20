@@ -1,8 +1,8 @@
 const accessKey = "1wVx5LqDx16Gj8S4VNZTu8B2kvopVE7KAhyENNb85-4";
 
 const formElement = document.querySelector("form");
-const inputElement = document.getElementById("seach-item");
-const seachResults = document.querySelector(".seach-results");
+const inputElement = document.getElementById("search-item");
+const seachResults = document.querySelector(".search-results");
 const showMore = document.getElementById("show-more-button");
 
 let inputData = "";
@@ -18,12 +18,12 @@ async function searchImages() {
     const results = data.results;
 
     if (page === 1) {
-        seachResults.innerHTML = ""
+        seachResults.innerHTML = "";
     }
 
     results.map((result) => {
         const imageWrapper = document.createElement("div");
-        imageWrapper.classList.add("seach-result");
+        imageWrapper.classList.add("search-result");
 
         const image = document.createElement("img");
         image.src   = result.urls.small;
@@ -36,8 +36,22 @@ async function searchImages() {
 
         imageWrapper.appendChild(image);
         imageWrapper.appendChild(imageLink);
-        imageWrapper.appendChild(imageWrapper);
+        seachResults.appendChild(imageWrapper);
     });
 
     page++;
+
+    if (page > 1) {
+        showMore.style.display = "block";
+    }
 }
+
+formElement.addEventListener("submit", (event) => {
+    event.preventDefault();
+    page = 1;
+    searchImages();
+});
+
+showMore.addEventListener("submit", (event) => {
+    searchImages();
+});
