@@ -52,6 +52,6 @@ formElement.addEventListener("submit", (event) => {
     searchImages();
 });
 
-showMore.addEventListener("submit", (event) => {
+showMore.addEventListener("click", () => {
     searchImages();
 });
